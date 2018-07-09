@@ -3,9 +3,10 @@ require_relative '../models/politician'
 require_relative 'ballot'
 
 class Election
-  attr_reader :id
+  attr_reader :id, :vote_count, :winner
   attr_accessor :candidates, :voters, :ballots
   @@elections = []
+
   def initialize(cands)
     # Set default values
     set_id
@@ -33,8 +34,7 @@ class Election
   # Creates the ballots, votes
   def create_ballots
     @voters.each do |voter|
-      candidate = candidates.sample
-      @ballots << Ballot.new(self, voter, candidate) 
+      @ballots << Ballot.new(self, voter)
     end
     self.tally
   end
@@ -51,8 +51,6 @@ class Election
       voteCount[1] == vote_count.map{|votes| votes[1]}.max
     end
     @winner = @vote_count[winner_index][0]
-    puts @vote_count
-    puts @winner.name
   end
 
   # Helper selects election with id
@@ -60,6 +58,10 @@ class Election
     Election.elections.find do |elec|
       elec.id == id
     end
+  end
+
+  def get_rep(party)
+    Politician.get_party(party, @candidates)[0]
   end
 
   # Sets an id to every new election

@@ -26,5 +26,7 @@ module Elections_Controller
     elec_id = Election_Prompts.choose(elections)
     election = Election.find(elec_id)
     election.create_ballots
+    Election_Prompts.display_results(election)
   end
+
 end
