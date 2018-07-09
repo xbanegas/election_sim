@@ -8,7 +8,7 @@ module Politicians_Controller
     name = data[:name]
     affiliation = data[:affiliation]
     politician = Politician.new(name, affiliation)
-    Politician_Prompts.display(politician)
+    Politician_Prompts.display_person(politician)
   end
 
   def self.list
@@ -26,7 +26,7 @@ module Politicians_Controller
     when "a"
       politician.affiliation = pol[:value]
     end
-    Politician_Prompts.display(politician)
+    Politician_Prompts.display_person(politician)
   end
 
   def self.delete

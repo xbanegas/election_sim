@@ -1,5 +1,7 @@
+require_relative 'prompts'
+
 # Politician Prompts
-module Politician_Prompts
+class Politician_Prompts < Prompts
   AFILLS = {"d" => "Democrat", "r" => "Republican"}
   FIELDS = {"n" => "Name", "a"=>"Affiliation"}
   AFILL_PROMPT = "Enter affiliation: (D)emocrat or (R)epublican"
@@ -14,7 +16,7 @@ module Politician_Prompts
 
   def self.list(politicians)
     pol_list = politicians.map do |pol| 
-      display pol
+      display_person pol
     end
   end
 
@@ -39,7 +41,4 @@ module Politician_Prompts
     pol_id = gets.chomp.to_i
   end
 
-  def self.display(pol)
-    puts "##{pol.id} #{pol.name}: #{AFILLS[pol.affiliation]}"
-  end
 end

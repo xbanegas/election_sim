@@ -8,7 +8,7 @@ module Voters_Controller
     name = data[:name]
     affiliation = data[:affiliation]
     voter = Voter.new(name, affiliation)
-    Voter_Prompts.display(voter)
+    Voter_Prompts.display_person(voter)
   end
 
   def self.list
@@ -26,7 +26,7 @@ module Voters_Controller
     when "a"
       voter.affiliation = voter_data[:value]
     end
-    Voter_Prompts.display(voter)
+    Voter_Prompts.display_person(voter)
   end
 
   def self.delete

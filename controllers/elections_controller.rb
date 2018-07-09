@@ -9,13 +9,7 @@ module Elections_Controller
     # User Choose Candidates
     cand_options = Person.politicians
     cands = Election_Prompts.create(cand_options)
-    election = Election.new
-    # Add Candidates to Election
-    dem = Politician.find(cands[:dem])
-    rep = Politician.find(cands[:rep])
-    election.candidates += [dem, rep]
-    # Add Voters to Election
-    election.voters += Person.voters
+    election = Election.new(cands)
   end
 
   def self.list

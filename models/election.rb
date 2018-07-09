@@ -1,10 +1,13 @@
+require_relative '../models/person'
+require_relative '../models/politician'
 require_relative 'ballot'
 
 class Election
   attr_reader :id
   attr_accessor :candidates, :voters, :ballots
   @@elections = []
-  def initialize
+  def initialize(cands)
+    # Set default values
     set_id
     # array of politician ids
     @candidates = []
@@ -14,12 +17,20 @@ class Election
     @vote_count = nil
     @winner = nil
     @@elections << self
+
+    # Initialize voters and candidates with users choices
+    dem = Politician.find(cands[:dem])
+    rep = Politician.find(cands[:rep])
+    @candidates += [dem, rep]
+    @voters += Person.voters
   end
 
+  # Reader for elections
   def self.elections
     @@elections
   end
 
+  # Creates the ballots, votes
   def create_ballots
     @voters.each do |voter|
       candidate = candidates.sample
@@ -28,6 +39,7 @@ class Election
     self.tally
   end
 
+  # Tallys ballots and sets vote_count and winner
   def tally
     vote_count = @candidates.map{|candidate| [candidate, 0]}
     @ballots.each do |ballot|
@@ -43,12 +55,14 @@ class Election
     puts @winner.name
   end
 
+  # Helper selects election with id
   def self.find(id)
     Election.elections.find do |elec|
       elec.id == id
     end
   end
 
+  # Sets an id to every new election
   private
   def set_id
     @id = @@elections.length + 1

@@ -2,6 +2,10 @@ require_relative '../controllers/elections_controller'
 require_relative '../controllers/politicians_controller'
 require_relative '../controllers/voters_controller'
 
+# Routes Module
+# Invoke by main loop. It then handles routing the user input 
+# to the next appropriate prompt or controller that calls that prompt
+
 module Routes
   def self.route(command)
     case command

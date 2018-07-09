@@ -1,4 +1,6 @@
-module Voter_Prompts
+require_relative 'prompts'
+
+class Voter_Prompts < Prompts
   AFFILS = {
     "l" => "Liberal", "c" => "Conservative",
     "t" => "Tea Party", "s" => "Socialist",

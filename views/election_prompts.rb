@@ -1,8 +1,9 @@
+require_relative 'prompts'
 require_relative 'politician_prompts'
 
 # Election Prompts
 
-module Election_Prompts
+class Election_Prompts < Prompts
   def self.create(candidates)
     puts "Creating Election"
     Politician_Prompts.list(candidates)
